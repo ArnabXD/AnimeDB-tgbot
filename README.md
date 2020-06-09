@@ -17,4 +17,5 @@ python3 -m bot
 #### .env ( Mandatory )
 ```
 BOT_TOKEN=YOUR BOT TOKEN FROM @BOTFATHER
+BOT_USERNAME=YOUR BOT'S USERNAME (WITH @ SYMBOL)
 ```
