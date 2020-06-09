@@ -1,5 +1,5 @@
-# AnimeDB-tgbot
-A Telegram Bot to Search Anime & Manga Details using kitsu.io API
+# AnimeDB-tgbot 
+A Telegram Bot ([@AnimeDB_Bot](https://telegram.dog/animedb_bot)) to Search Anime & Manga Details using kitsu.io API
 
 ## Deploy Your Own 
 ### Simple Way
