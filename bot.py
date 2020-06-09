@@ -1,6 +1,7 @@
 import telebot,search
+from decouple import config
 
-bot = telebot.TeleBot("1153023482:AAHqxLOLkXs6XdDb9-tQ-hOANeJVoHiYFIw")
+bot = telebot.TeleBot(config('BOT_TOKEN'))
 
 help_str = """
 Here is the list of commands
@@ -28,11 +29,11 @@ def search_xxx(m):
   key = telebot.util.extract_arguments(m.text)
   
   if not key:
-    bot.reply_to(m,f"<b>Example : </b>`/{s_type} Naruto`",parse_mode='HTML')
+    bot.reply_to(m,f"*Example :* `/{s_type} Naruto`",parse_mode='Markdown')
   else:
     print(" Searching for",key)
     result = search.search_anime(s_type,key)
-    if result != 0:
+    if (result != 0 and result != 1):
       print(f" Result Found for {key}")
       poster = result["attributes"]["posterImage"]["large"]
       synopsis = "<b>📖 Synopsis : </b> "+result['attributes']['synopsis']
@@ -42,7 +43,8 @@ def search_xxx(m):
       f"<b>👤 Age Rating : </b>{result['attributes']['ageRating']} ({result['attributes']['ageRatingGuide']})\n")
       bot.send_photo(m.chat.id,poster,caption,parse_mode='HTML')
       bot.send_message(m.chat.id,synopsis,parse_mode='HTML')
-    else:
+    elif result==0:
       bot.reply_to(m,f"No {s_type} found ☹️")
-
+    else:
+      bot.reply_to(m,"Seems like i am having some problems in fetching your requested data , Please Try Again Later 🙂.")
 bot.polling()
