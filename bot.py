@@ -3,6 +3,8 @@ from decouple import config
 
 bot = telebot.TeleBot(config('BOT_TOKEN'))
 
+welcome_str=(f"Konichiwa , Welcome to {config('BOT_USERNAME')}\n"
+f"You can get my commands list using /help .")
 help_str = """
 Here is the list of commands
 /anime - To search a anime by name
@@ -17,7 +19,7 @@ stype = {
 
 @bot.message_handler(commands=['start'])
 def send_welcome(m):
-	bot.reply_to(m, "Welcome to @AnimeDB_Bot")
+	bot.reply_to(m, welcome_str)
 
 @bot.message_handler(commands=['help'])
 def send_help(m):

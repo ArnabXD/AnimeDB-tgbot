@@ -16,6 +16,11 @@
       "description": "GET BOT TOKEN FROM @BOTFATHER IN TELEGRAM",
       "value": "",
       "required" : true
+    },
+    "BOT_USERNAME": {
+      "description" : "Bot Username , Basically Required for Welcome Message",
+      "value": "",
+      "required": true
     }
   },
   "buildpacks": [{
