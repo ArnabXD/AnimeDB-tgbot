@@ -70,11 +70,11 @@ bot.on('inline_query', (ctx) => {
 		})
 })
 
-// bot.launch({
-// 	webhook: {
-//  		domain: process.env.BOT_DOMAIN,
-//  		port: process.env.PORT
-//  	}
-// })
+bot.launch({
+	webhook: {
+ 		domain: process.env.BOT_DOMAIN,
+ 		port: process.env.PORT
+ 	}
+})
 
-bot.launch()
+// bot.launch()
