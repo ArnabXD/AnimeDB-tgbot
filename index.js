@@ -21,7 +21,8 @@ bot.start((ctx) => {
 		Extra.markup(
 			Markup.inlineKeyboard([
 				[Markup.switchToCurrentChatButton('Search Anime', '', false)],
-				[Markup.urlButton('Help & More', process.env.HELP_LINK || 'https://telegra.ph/AnimeDB-Bot--HELP-08-03')]
+				[Markup.urlButton('Help & More', process.env.HELP_LINK || 'https://telegra.ph/AnimeDB-Bot--HELP-08-03')],
+				[Markup.urlButton('Rate Me', 'https://t.me/tlgrmcbot?start=animedb_bot-review')]
 			])
 		))
 })
@@ -56,7 +57,8 @@ bot.on('inline_query', (ctx) => {
 					parse_mode: "HTML"
 				},
 				reply_markup: Markup.inlineKeyboard([
-					Markup.urlButton('View in MyAnimeList.net', item.url)
+					[Markup.urlButton('View in MyAnimeList.net', item.url)],
+					[Markup.switchToCurrentChatButton('Search More', '', false)]
 				])
 			}))
 			ctx.answerInlineQuery(animes)
@@ -68,11 +70,11 @@ bot.on('inline_query', (ctx) => {
 		})
 })
 
-bot.launch({
-	webhook: {
- 		domain: process.env.BOT_DOMAIN,
- 		port: process.env.PORT
- 	}
-})
+// bot.launch({
+// 	webhook: {
+//  		domain: process.env.BOT_DOMAIN,
+//  		port: process.env.PORT
+//  	}
+// })
 
-// bot.launch()
+bot.launch()
