@@ -1,19 +1,10 @@
 const Telegraf = require('telegraf')
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
-const axios = require('axios')
+var anime = require('./api')
 require('dotenv').config()
 
 const bot = new Telegraf(process.env.BOT_TOKEN)
-
-async function Search(key) {
-	let config = {
-		method: 'get',
-		url: `https://api.jikan.moe/v3/search/anime?q=${key}`,
-	}
-	let response = await axios(config)
-	return response.data.results
-}
 
 bot.start((ctx) => {
 	ctx.webhookReply = false
@@ -21,11 +12,14 @@ bot.start((ctx) => {
 		Extra.markup(
 			Markup.inlineKeyboard([
 				[Markup.switchToCurrentChatButton('Search Anime', '', false)],
-				[Markup.urlButton('Help & More', process.env.HELP_LINK || 'https://telegra.ph/AnimeDB-Bot--HELP-08-03')],
-				[Markup.urlButton('Rate Me', 'https://t.me/tlgrmcbot?start=animedb_bot-review')]
+				[
+					Markup.urlButton('Help & More', process.env.HELP_LINK || 'https://telegra.ph/AnimeDB-Bot--HELP-08-03'),
+					Markup.urlButton('Rate Me', 'https://t.me/tlgrmcbot?start=animedb_bot-review')
+				]
 			])
 		))
 })
+
 bot.help((ctx) => {
 	ctx.webhookReply = false
 	ctx.replyWithHTML("<b>Click The Button Below</b>",
@@ -39,7 +33,7 @@ bot.help((ctx) => {
 bot.on('inline_query', (ctx) => {
 	ctx.webhookReply = false
 	console.log(`Searching for ${ctx.inlineQuery.query}`)
-	Search(ctx.inlineQuery.query)
+	anime.Search(ctx.inlineQuery.query)
 		.then((results) => {
 			let animes = results.map((item) => ({
 				type: 'article',
@@ -61,13 +55,38 @@ bot.on('inline_query', (ctx) => {
 					[Markup.switchToCurrentChatButton('Search More', '', false)]
 				])
 			}))
-			ctx.answerInlineQuery(animes)
+			return ctx.answerInlineQuery(animes)
 		})
 		.catch((error) => {
 			let animes = []
-			ctx.answerInlineQuery(animes)
 			console.log(error)
+			return ctx.answerInlineQuery(animes)
 		})
+})
+
+bot.on('chosen_inline_result', async (ctx) => {
+	ctx.webhookReply = false
+	try {
+		let item = await anime.Details(ctx.chosenInlineResult.result_id)
+		let message = "<b>Anime :</b> " + item.title + "(" + item.type + ")" +
+			"\n<b>Year :</b> " + item.aired.from.substr(0, 4) +
+			"\n<b>Status :</b> " + item.status +
+			"\n<b>Age Rating :</b> " + item.rating +
+			"\n<b>Rating :</b> " + item.score + "<a href='" + item.image_url + "'>&#8205;</a>" +
+			"\n<b>MAL Rank :</b> " + item.rank +
+			"\n<b>Genres :</b> " + (item.genres.map((g) => g.name)) +
+			"\n<b>Synopsis :</b> " + item.synopsis
+		return ctx.editMessageText(message, {
+			parse_mode: 'HTML',
+			reply_markup: Markup.inlineKeyboard([
+				[Markup.urlButton('View In MyAnimeList.net', item.url)],
+				[Markup.switchToCurrentChatButton('Search More', '', false)]
+			])
+		})
+	}
+	catch (err) {
+		console.log(err)
+	}
 })
 
 bot.launch({
