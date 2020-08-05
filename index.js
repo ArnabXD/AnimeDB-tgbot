@@ -4,7 +4,7 @@ const Markup = require('telegraf/markup')
 var anime = require('./api')
 require('dotenv').config()
 
-const bot = new Telegraf(process.env.BOT_TOKEN)
+const bot = new Telegraf(process.env.BOT_TOKEN, { username: process.env.BOT_USERNAME })
 
 bot.start((ctx) => {
 	ctx.webhookReply = false
@@ -42,14 +42,14 @@ bot.on('inline_query', (ctx) => {
 				description: "✪ " + item.score,
 				thumb_url: item.image_url,
 				input_message_content: {
-					message_text: `<b>Anime :</b> <code>${item.title}</code>\n` +
-						`═══════════════════════════\n` +
+					message_text: `<b>${item.title}</b>\n` +
+						`═════════════════════════════\n` +
 						`<b>Type :</b> <code>${item.type}</code>\n` +
 						`<b>Year :</b> <code>` + (typeof (item.start_date) === 'string' ? item.start_date.substr(0, 4) : item.start_date) + `</code>\n` +
 						`<b>Age Rating :</b> <code>${item.rated}</code>\n` +
 						`<b>Rating :</b> <code>${item.score}</code><a href="${item.image_url}">&#8205;</a>\n` +
-						`═══════════════════════════\n` +
-						`<b>Synopsis :</b> <code>${item.synopsis}</code> <a href="${item.url}">Read More</a>`,
+						`═════════════════════════════\n` +
+						`<code>${item.synopsis}</code>.<a href="${item.url}">Read More</a>`,
 					parse_mode: "HTML"
 				},
 				reply_markup: Markup.inlineKeyboard([
@@ -69,16 +69,16 @@ bot.on('chosen_inline_result', async (ctx) => {
 	ctx.webhookReply = false
 	try {
 		let item = await anime.Details(ctx.chosenInlineResult.result_id)
-		let message = "<b>Anime :</b> <code>" + item.title + " (" + item.type + ")</code>" +
-			"\n═══════════════════════════" +
+		let message = "<b>" + item.title + " (" + item.type + ")</b>" +
+			"\n═════════════════════════════" +
 			"\n<b>Year :</b> <code>" + item.aired.from.substr(0, 4) + "</code>" +
 			"\n<b>Status :</b> <code>" + item.status + "</code>" +
 			"\n<b>Age Rating :</b> <code>" + item.rating + "</code>" +
 			"\n<b>Rating :</b> <code>" + item.score + "</code><a href='" + item.image_url + "'>&#8205;</a>" +
 			"\n<b>MAL Rank :</b> <code>" + item.rank + "</code>" +
 			"\n<b>Genres :</b> <code>" + (item.genres.map((g) => g.name).join(', ')) + "</code>" +
-			"\n═══════════════════════════" +
-			"\n<b>Synopsis :</b> <code>" + item.synopsis.replace('[Written by MAL Rewrite]', '') + "</code>"
+			"\n═════════════════════════════" +
+			"\n<code>" + item.synopsis.replace('[Written by MAL Rewrite]', '') + "</code>"
 		return ctx.editMessageText(message, {
 			parse_mode: 'HTML',
 			reply_markup: Markup.inlineKeyboard([
