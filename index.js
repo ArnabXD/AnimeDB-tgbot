@@ -69,7 +69,7 @@ bot.on('chosen_inline_result', async (ctx) => {
 
 		let message = "<b>" + item.title + " (" + item.type + ")</b>\n" +
 			// "\n═════════════════════════════" +
-			(item.title != item.title_english ? "\n<b>English Title :</b> <code>" + item.title_english + "</code>" : "") +
+			(item.title != item.title_english && item.title_english ? "\n<b>English Title :</b> <code>" + item.title_english + "</code>" : "") +
 			"\n<b>Year :</b> <code>" + item.aired.from.substr(0, 4) + "</code>" +
 			"\n<b>Status :</b> <code>" + item.status + "</code>" +
 			"\n<b>Age Rating :</b> <code>" + item.rating + "</code>" +
