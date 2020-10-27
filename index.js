@@ -82,8 +82,8 @@ bot.on('chosen_inline_result', async (ctx) => {
 		return ctx.editMessageText(message, {
 			parse_mode: 'HTML',
 			reply_markup: Markup.inlineKeyboard([
-				[Markup.urlButton('Watch Trailer', item.trailer_url)],
-				[Markup.urlButton('View In MyAnimeList.net', item.url)]
+				[Markup.urlButton('View In MyAnimeList.net', item.url)],
+				[Markup.urlButton('Watch Trailer', item.trailer_url || 'https://telegra.ph/No-Trailer-URL-Available-10-27')]
 			])
 		})
 	}
