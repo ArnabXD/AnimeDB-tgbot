@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "@ArnabXD",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",
-    "telegraf": "^3.38.0"
+    "telegraf": "^4.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

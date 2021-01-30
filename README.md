@@ -12,7 +12,6 @@ npm start
 #### .env File
 ```
 BOT_TOKEN=YOUR BOT TOKEN FROM @BOTFATHER
-BOT_USERNAME=@YOUR-BOT-USERNAME
 BOT_DOMAIN=https://yourWebhook.domain
 PORT=yourWebhookPort
 ```

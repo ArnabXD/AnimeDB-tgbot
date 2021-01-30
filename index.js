@@ -1,35 +1,35 @@
-const Telegraf = require('telegraf')
-const Extra = require('telegraf/extra')
-const Markup = require('telegraf/markup')
-var anime = require('./api')
+// @ts-check
 require('dotenv').config()
+const { Telegraf, Markup } = require('telegraf');
+const { Search, Details } = require('./api');
 
-const bot = new Telegraf(process.env.BOT_TOKEN, { username: process.env.BOT_USERNAME })
+const bot = new Telegraf(process.env.BOT_TOKEN, {
+	telegram: {
+		webhookReply: false
+	}
+});
 
 bot.start((ctx) => {
-	ctx.webhookReply = false
-	ctx.replyWithHTML("<b>Hi There . Have a Great Day\nReport Bug/Errors/Suggesions : <a href='tg://user?id=611816596'>Λгɳαɓ</a></b>",
-		Extra.markup(
-			Markup.inlineKeyboard([
-				[Markup.urlButton('Bot Updates & News', 'https://t.me/xdbots')],
-				[
-					Markup.urlButton('Help & More', process.env.HELP_LINK || 'https://telegra.ph/AnimeDB-Bot--HELP-08-03'),
-					Markup.urlButton('Rate Me', 'https://t.me/tlgrmcbot?start=animedb_bot-review')
-				],
-				[Markup.switchToCurrentChatButton('Search Anime', '', false)]
-			])
-		))
+	ctx.replyWithHTML("<b>Hi There . Have a Great Day\nReport Bug/Errors/Suggesions : <a href='tg://user?id=611816596'>Λгɳαɓ</a></b>", {
+		...Markup.inlineKeyboard([
+			[Markup.button.url('Bot Updates & News', 'https://t.me/xdbots')],
+			[
+				Markup.button.url('Help & More', process.env.HELP_LINK || 'https://telegra.ph/AnimeDB-Bot--HELP-08-03'),
+				Markup.button.url('Rate Me', 'https://t.me/tlgrmcbot?start=animedb_bot-review')
+			],
+			[Markup.button.switchToCurrentChat('Search Anime', '', false)]
+		])
+	}
+	)
 })
 
 bot.help((ctx) => {
-	ctx.webhookReply = false
 	ctx.replyWithVideo('https://telegra.ph/file/0daa0c8ea1c703c6785ef.mp4');
 });
 
 bot.on('inline_query', (ctx) => {
-	ctx.webhookReply = false;
 	ctx.inlineQuery.query && ctx.inlineQuery.query.length > 2 ?
-		anime.Search(ctx.inlineQuery.query)
+		Search(ctx.inlineQuery.query)
 			.then((results) => {
 				console.log(`Searching for ${ctx.inlineQuery.query}`);
 				let animes = results.map((item) => ({
@@ -47,8 +47,8 @@ bot.on('inline_query', (ctx) => {
 							`<code>${item.synopsis}</code>.<a href="${item.url}">Read More</a>`,
 						parse_mode: "HTML"
 					},
-					reply_markup: Markup.inlineKeyboard([
-						[Markup.urlButton('View in MyAnimeList.net', item.url)]
+					...Markup.inlineKeyboard([
+						[Markup.button.url('View in MyAnimeList.net', item.url)]
 					])
 				}))
 				return ctx.answerInlineQuery(animes)
@@ -63,10 +63,8 @@ bot.on('inline_query', (ctx) => {
 })
 
 bot.on('chosen_inline_result', async (ctx) => {
-	ctx.webhookReply = false
 	try {
-		let item = await anime.Details(ctx.chosenInlineResult.result_id);
-
+		let item = await Details(ctx.chosenInlineResult.result_id);
 		let message = "<b>" + item.title + " (" + item.type + ")</b>\n" +
 			// "\n═════════════════════════════" +
 			(item.title != item.title_english && item.title_english ? "\n<b>English Title :</b> <code>" + item.title_english + "</code>" : "") +
@@ -81,21 +79,22 @@ bot.on('chosen_inline_result', async (ctx) => {
 			"\n<code>" + item.synopsis.replace('[Written by MAL Rewrite]', '') + "</code>"
 		return ctx.editMessageText(message, {
 			parse_mode: 'HTML',
-			reply_markup: Markup.inlineKeyboard([
-				[Markup.urlButton('View In MyAnimeList.net', item.url)],
-				[Markup.urlButton('Watch Trailer', item.trailer_url || 'https://telegra.ph/No-Trailer-URL-Available-10-27')]
+			// @ts-ignore
+			...Markup.inlineKeyboard([
+				[Markup.button.url('View In MyAnimeList.net', item.url)],
+				...(item.trailer_url ? [Markup.button.url('Watch Trailer', item.trailer_url)] : [])
 			])
 		})
 	}
 	catch (err) {
-		console.log(err)
+		console.error(err)
 	}
 })
 
 bot.launch({
 	webhook: {
 		domain: process.env.BOT_DOMAIN,
-		port: process.env.PORT
+		port: parseInt(process.env.PORT)
 	}
 })
 
