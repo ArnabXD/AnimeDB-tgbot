@@ -82,7 +82,7 @@ bot.on('chosen_inline_result', async (ctx) => {
 			// @ts-ignore
 			...Markup.inlineKeyboard([
 				[Markup.button.url('View In MyAnimeList.net', item.url)],
-				...(item.trailer_url ? [Markup.button.url('Watch Trailer', item.trailer_url)] : [])
+				[Markup.button.url('Watch Trailer', item.trailer_url || 'https://telegra.ph/No-Trailer-URL-Available-10-27')]
 			])
 		})
 	}
@@ -98,4 +98,4 @@ bot.launch({
 	}
 })
 
-// bot.launch()
+bot.launch()
