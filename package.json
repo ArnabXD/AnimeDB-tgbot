@@ -8,8 +8,7 @@
     "start": "node ./build/index",
     "serve": "ts-node ./src/index",
     "dev": "nodemon ./src/index",
-    "test": "tsc --noEmit",
-    "postinstall": "tsc"
+    "test": "tsc --noEmit"
   },
   "keywords": [
     "Telegram",
