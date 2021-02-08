@@ -22,20 +22,25 @@ bot.on('callback_query', async (ctx) => {
                 }
                 let message = parseMedia(result, type);
                 let { trailer } = result.data.Media
-                return await ctx.editMessageMedia({
-                    type: 'photo',
-                    media: `https://img.anili.st/media/${id}`,
-                    caption: message,
-                    parse_mode: 'HTML',
-                },
-                    Markup.inlineKeyboard([
-                        [
-                            Markup.button.url('AniList', `https://anilist.co/${type?.toLowerCase()}/${id}`),
-                            Markup.button.url('MyAnimeList', `https://myanimelist.net/${type?.toLowerCase()}/${result.data.Media.idMal}`)
-                        ],
-                        ...(trailer && trailer.site === "youtube" ? [[Markup.button.url('Watch Trailer', `https://youtu.be/${trailer.id}`)]] : [])
-                    ])
-                );
+                try {
+                    return await ctx.editMessageMedia({
+                        type: 'photo',
+                        media: `https://img.anili.st/media/${id}`,
+                        caption: message,
+                        parse_mode: 'HTML',
+                    },
+                        Markup.inlineKeyboard([
+                            [
+                                Markup.button.url('AniList', `https://anilist.co/${type?.toLowerCase()}/${id}`),
+                                Markup.button.url('MyAnimeList', `https://myanimelist.net/${type?.toLowerCase()}/${result.data.Media.idMal}`)
+                            ],
+                            ...(trailer && trailer.site === "youtube" ? [[Markup.button.url('Watch Trailer', `https://youtu.be/${trailer.id}`)]] : [])
+                        ])
+                    );
+                } catch (err) {
+                    console.log(err);
+                    return ctx.answerCbQuery('Something Went Wrong , Please Report this to @Arnab431', { show_alert: true })
+                }
             default:
                 return ctx.answerCbQuery('Unhandled Action');
         }
