@@ -2,7 +2,7 @@ import { mediaResponse } from './anilist/getMedia';
 
 export const parseMedia = (resp: mediaResponse, type: "ANIME" | "MANGA" = "ANIME"): string => {
     let { Media } = resp.data;
-    console.log(JSON.stringify(Media))
+
     let synopsis = Media.description && Media.description.replace(/<\/br>/g, '').replace(/<br>/g, '');
     if (synopsis && synopsis.length > 700) {
         synopsis = synopsis.substr(0, 700) + `... <a href="https://anilist.co/${type.toLowerCase()}/${Media.id}">Read More</a>`
