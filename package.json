@@ -1,7 +1,7 @@
 {
   "name": "animedb-tgbot",
   "version": "2.5.0",
-  "description": "Fetch Anime and Manga Details from Anilist.Co and controll your anilist account from telegram",
+  "description": "Fetch Anime and Manga Details from Anilist.Co within telegram",
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
