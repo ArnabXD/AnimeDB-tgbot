@@ -5,9 +5,11 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
-    "start": "node ./build/index.js",
-    "dev": "nodemon ./src/index.ts",
-    "test": "tsc --noEmit"
+    "start": "node ./build/index",
+    "serve": "ts-node ./src/index",
+    "dev": "nodemon ./src/index",
+    "test": "tsc --noEmit",
+    "postinstall": "tsc"
   },
   "keywords": [
     "Telegram",
