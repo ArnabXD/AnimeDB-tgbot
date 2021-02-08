@@ -1,0 +1,26 @@
+{
+	"Commands": {
+		"prefix": "cmd",
+		"body": [
+			"import { Composer } from 'telegraf'",
+			"",
+			"export default Composer.command('cmd', async (ctx) => {",
+			"\treturn await ctx.reply('cmd');",
+			"})"
+		],
+		"description": "Create Exportable Command"
+	},
+	"Middlewares":{
+		"prefix": "mdl",
+		"body": [
+			"import { Context, MiddlewareFn } from 'telegraf';",
+			"",
+			"const Mid: MiddlewareFn<Context> = async (ctx, next) => {",
+			"\treturn await next();",
+			"}",
+			"",
+			"export default Mid"
+		],
+		"description": "Create Exportable Middlewares"
+	}
+}

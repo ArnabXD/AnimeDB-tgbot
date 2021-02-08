@@ -1,0 +1,32 @@
+{
+  "name": "animedb-tgbot",
+  "version": "2.5.0",
+  "description": "Fetch Anime and Manga Details from Anilist.Co and controll your anilist account from telegram",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node ./build/index.js",
+    "dev": "nodemon ./src/index.ts",
+    "test": "tsc --noEmit"
+  },
+  "keywords": [
+    "Telegram",
+    "bot",
+    "telegraf-js"
+  ],
+  "author": "@ArnabXD <arnabxd@pm.me>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.1",
+    "telegraf": "^4.0.2",
+    "telegraf-command-parts": "^1.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.22",
+    "@types/node-fetch": "^2.5.8",
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  }
+}
