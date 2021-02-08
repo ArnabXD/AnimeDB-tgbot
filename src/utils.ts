@@ -16,7 +16,7 @@ export const parseMedia = (resp: mediaResponse, type: "ANIME" | "MANGA" = "ANIME
         (Media.studios.nodes.length ? `<b>• Studios :</b> ${Media.studios.nodes.map(data => data.name).join(', ')}\n` : '') +
         `\n`
     if (synopsis) {
-        synopsis = synopsis.length > (1000 - message.length) ? synopsis.substring(0, 1000 - message.length) + `... <a href="https://anilist.co/${type.toLowerCase()}/${Media.id}">Read More</a>` : synopsis
+        synopsis = synopsis.length > (900 - message.length) ? synopsis.substring(0, 900 - message.length) + `... <a href="https://anilist.co/${type.toLowerCase()}/${Media.id}">Read More</a>` : synopsis
         message += `<b>• Synopsis :</b> <i>${synopsis}</i>`;
     }
 
