@@ -2,7 +2,7 @@ import { mediaResponse } from './anilist/getMedia';
 
 export const parseMedia = (resp: mediaResponse, type: "ANIME" | "MANGA" = "ANIME"): string => {
     let { Media } = resp.data;
-    let synopsis = Media.description && Media.description.replace(/<\/br>/g, '').replace(/<br>/g, '');
+    let synopsis = Media.description && Media.description.replace(/(&nbsp;|<([^>]+)>)/ig, '');
 
     let message =
         `<b>${Media.title.romaji}</b> (${Media.format})\n\n` +
