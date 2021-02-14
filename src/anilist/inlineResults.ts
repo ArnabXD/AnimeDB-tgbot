@@ -50,7 +50,7 @@ const getInlineResults = async (key: string, type: 'ANIME' | 'MANGA' = 'ANIME', 
                         medium
                     }
                     genres
-                    description
+                    description (asHtml:false)
                     averageScore
                     status
                     format

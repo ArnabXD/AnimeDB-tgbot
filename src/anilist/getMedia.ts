@@ -47,7 +47,7 @@ const getMedia = async (id: number, type: 'ANIME' | 'MANGA' = 'ANIME'): Promise<
                       name
                   }
               }
-              description
+              description (asHtml:false)
               averageScore
               status
               format
