@@ -8,6 +8,7 @@ export default new Composer().on('inline_query', async ctx => {
 
     if (query.startsWith('<m> ')) {
         let args = query.substring(4)
+        if (args.length < 3) return;
         const result = await getInlineResults(args, 'MANGA');
         if (!result || result.data.Page.pageInfo.total === 0) return
         let { media } = result.data.Page
@@ -20,7 +21,7 @@ export default new Composer().on('inline_query', async ctx => {
             thumb_url: item.coverImage.medium,
             input_message_content: {
                 message_text: parseMedia({ data: { Media: item } }),
-                parse_mode: "Markdown"
+                parse_mode: "HTML"
             },
             ...Markup.inlineKeyboard([
                 [
