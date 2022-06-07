@@ -8,7 +8,7 @@
     "start": "node ./build/server",
     "test": "rimraf build && tsc --project tsconfig.json && ava",
     "prettify": "prettier --write \"./src/**/*.ts\"",
-    "lint": "eslint ./src/**/*.ts",
+    "lint": "eslint ./src/**/*.ts --max-warnings=0",
     "dev": "nodemon src/server.ts"
   },
   "keywords": [
@@ -16,6 +16,7 @@
     "bot",
     "grammy"
   ],
+  "private": true,
   "author": "@ArnabXD <arnabxd@pm.me>",
   "license": "MIT",
   "dependencies": {
