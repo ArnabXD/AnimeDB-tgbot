@@ -24,10 +24,10 @@
     "telegraf-command-parts": "^1.0.3"
   },
   "devDependencies": {
-    "@types/node": "^17.0.40",
-    "@types/node-fetch": "^2.6.1",
-    "nodemon": "^2.0.16",
-    "ts-node": "^10.8.1",
-    "typescript": "^4.7.3"
+    "@types/node": "17.0.40",
+    "@types/node-fetch": "2.6.1",
+    "nodemon": "2.0.16",
+    "ts-node": "10.8.1",
+    "typescript": "4.7.3"
   }
 }
