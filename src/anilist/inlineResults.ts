@@ -1,83 +1,78 @@
-import fetch from 'node-fetch';
-import { Media as MediaI } from './getMedia';
+import { client, gql } from './gqlClient';
+import { Media as IMedia } from './getMedia';
 
-interface Media extends MediaI {
-    coverImage: {
-        medium: string
-    }
+interface Media extends IMedia {
+  coverImage: {
+    medium: string;
+  };
 }
 
-export interface inlineResultsType {
-    data: {
-        Page: {
-            pageInfo: {
-                total: number,
-                currentPage: number,
-                lastPage: number,
-                hasNextPage: boolean,
-                perPage: number
-            },
-            media: Media[]
+export interface InlineResultsType {
+  data: {
+    Page: {
+      pageInfo: {
+        total: number;
+        currentPage: number;
+        lastPage: number;
+        hasNextPage: boolean;
+        perPage: number;
+      };
+      media: Media[];
+    };
+  };
+}
+
+export default async function getInlineResults(
+  key: string,
+  type: 'ANIME' | 'MANGA' = 'ANIME',
+  number = 25
+) {
+  const query = gql`
+    query ($id: Int, $page: Int, $perPage: Int, $search: String) {
+      Page (page: $page, perPage: $perPage) {
+        pageInfo {
+          total
+          currentPage
+          lastPage
+          hasNextPage
+          perPage
         }
-    }
-};
-
-const getInlineResults = async (key: string, type: 'ANIME' | 'MANGA' = 'ANIME', number: number = 25) => {
-    let graphql = JSON.stringify({
-        query: `query ($id: Int, $page: Int, $perPage: Int, $search: String) {
-            Page (page: $page, perPage: $perPage) {
-                pageInfo {
-                    total
-                    currentPage
-                    lastPage
-                    hasNextPage
-                    perPage
-                }
-                media (id: $id, search: $search,type:${type}) {
-                    id
-                    idMal
-                    title {
-                        romaji
-                        english
-                    }
-                    isAdult
-                    studios {
-                        nodes {
-                            name
-                        }
-                    }
-                    coverImage {
-                        medium
-                    }
-                    genres
-                    description (asHtml:false)
-                    averageScore
-                    status
-                    format
-                    trailer {
-                        id
-                        site
-                    }
-                }
+        media (id: $id, search: $search,type:${type}) {
+          id
+          idMal
+          title {
+            romaji
+            english
+          }
+          isAdult
+          studios {
+            nodes {
+              name
             }
-        }`,
-        variables: { "search": key, "perPage": number }
+          }
+          coverImage {
+            medium
+          }
+          genres
+          description (asHtml:false)
+          averageScore
+          status
+          format
+          trailer {
+            id
+            site
+          }
+        }
+      }
+    }`;
+  try {
+    const data = await client.request<InlineResultsType>(query, {
+      search: key,
+      perPage: number
     });
-    try {
-        let response = await fetch('https://graphql.anilist.co', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: graphql
-        })
-        let data: inlineResultsType = await response.json();
-        return (data.data.Page.pageInfo.total === 0) ? null : data
-    }
-    catch (err) {
-        console.error(err);
-        return null;
-    }
+    return data.data.Page.pageInfo.total === 0 ? null : data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 }
-
-export default getInlineResults;
