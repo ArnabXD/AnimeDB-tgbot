@@ -1,6 +1,6 @@
 {
   "name": "animedb-tgbot",
-  "version": "2.5.0",
+  "version": "3.0.0",
   "description": "Fetch Anime and Manga Details from Anilist.Co within telegram",
   "main": "src/server.ts",
   "scripts": {
