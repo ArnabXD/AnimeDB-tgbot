@@ -15,7 +15,6 @@ specifiers:
   grammy: ^1.8.3
   graphql: ^16.5.0
   graphql-request: ^4.3.0
-  hono: ^1.4.5
   nodemon: 2.0.16
   prettier: ^2.6.2
   rimraf: ^3.0.2
@@ -30,7 +29,6 @@ dependencies:
 
 optionalDependencies:
   express: 4.18.1
-  hono: 1.4.5
 
 devDependencies:
   '@ava/typescript': 3.0.1
@@ -1226,6 +1224,7 @@ packages:
   /express/4.18.1:
     resolution: {integrity: sha512-zZBcOX9TfehHQhtupq57OF8lFZ3UZi08Y97dwFCkD8p9d/d2Y3M+ykKcwaMDEL+4qyUolgBDX6AblpR3fL212Q==}
     engines: {node: '>= 0.10.0'}
+    requiresBuild: true
     dependencies:
       accepts: 1.3.8
       array-flatten: 1.1.1
@@ -1572,13 +1571,6 @@ packages:
     engines: {node: '>= 0.4.0'}
     dependencies:
       function-bind: 1.1.1
-    dev: false
-    optional: true
-
-  /hono/1.4.5:
-    resolution: {integrity: sha512-C2WBj+MbvKXkif38vKK51DCGcOEMlzfOZR+rtjxGLQLE5blPQW1JCY6Y8LEQjCUNgwb3y0De5i6CDdj1i0SWKw==}
-    engines: {node: '>=11.0.0'}
-    requiresBuild: true
     dev: false
     optional: true
 
