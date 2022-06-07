@@ -17,8 +17,8 @@ pnpm run start
 
 ```
 BOT_TOKEN=YOUR BOT TOKEN FROM @BOTFATHER
+
 # OPTIONAL FOR WEBHOOK
-BOT_DOMAIN=https://yourWebhook.domain
 PORT=yourWebhookPort
 ```
 
