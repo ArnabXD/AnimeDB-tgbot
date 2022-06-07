@@ -1,20 +1,14 @@
 import express from 'express';
-import { Bot, webhookCallback } from 'grammy';
-import Middlewares from './middlewares';
-import Commands from './commands';
-import Handlers from './handlers';
-import dotenv from 'dotenv';
+import { webhookCallback } from 'grammy';
+import bot from './bot';
 
-dotenv.config();
+const app = express();
+
 const token = process.env.BOT_TOKEN;
 if (!token) {
   throw new Error('BOT_TOKEN is not defined');
 }
 
-const app = express();
-const bot = new Bot(token);
-
-bot.use(Middlewares, Commands, Handlers);
 app.get(`/${token}`, async (req, res) => {
   const fullUrl = `https://${req.get('host')}${req.originalUrl}`;
   await bot.api.setWebhook(fullUrl);
