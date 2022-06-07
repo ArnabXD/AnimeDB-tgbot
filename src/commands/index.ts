@@ -1,5 +1,4 @@
-import { Composer } from 'telegraf';
-import { CommandContext } from '../middlewares';
+import { Composer } from 'grammy';
 
 import start from './start';
 import help from './help';
@@ -7,14 +6,8 @@ import anime from './anime';
 import manga from './manga';
 import id from './id';
 
-const bot = new Composer<CommandContext>();
+const composer = new Composer();
 
-bot.use(
-    start,
-    help,
-    anime,
-    manga,
-    id
-);
+composer.use(start, help, anime, manga, id);
 
-export default bot;
+export default composer;

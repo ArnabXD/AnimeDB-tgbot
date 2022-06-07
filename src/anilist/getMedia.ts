@@ -20,19 +20,17 @@ export interface Media {
   trailer: {
     id: string;
     site: string;
-  };
+  } | null;
 }
 
 export interface MediaResponse {
-  data: {
-    Media: Media;
-  };
+  Media: Media;
 }
 
-const getMedia = async (
+export default async function getMedia(
   id: number,
   type: 'ANIME' | 'MANGA' = 'ANIME'
-): Promise<MediaResponse | null> => {
+) {
   const query = gql`
     query ($id: Int) { 
       Media (id: $id, type: ${type}) {
@@ -66,6 +64,4 @@ const getMedia = async (
     console.error(err);
     return null;
   }
-};
-
-export default getMedia;
+}

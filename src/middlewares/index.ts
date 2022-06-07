@@ -1,11 +1,7 @@
-import { Composer } from 'telegraf';
-
-import cmd, { CommandContext } from './cmd';
+import { Composer } from 'grammy';
 import ping from './ping';
 
-export default new Composer<CommandContext>().use(
-    cmd,
-    ping
-);
+const composer = new Composer();
+composer.use(ping);
 
-export { CommandContext };
+export default composer;

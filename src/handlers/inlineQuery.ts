@@ -1,62 +1,97 @@
-import { Composer, Markup } from 'telegraf';
+import { Composer, InlineKeyboard } from 'grammy';
+import { InlineQueryResultArticle } from '@grammyjs/types';
 import { getInlineResults } from '../anilist';
 import { parseMedia } from '../utils';
-import { InlineQueryResultArticle } from 'typegram';
 
-export default new Composer().on('inline_query', async ctx => {
-    const { query } = ctx.inlineQuery;
+const composer = new Composer();
 
-    if (query.startsWith('<m> ')) {
-        let args = query.substring(4)
-        if (args.length < 3) return;
-        const result = await getInlineResults(args, 'MANGA');
-        if (!result || result.data.Page.pageInfo.total === 0) return
-        let { media } = result.data.Page
+composer.on('inline_query', async (ctx) => {
+  const { query } = ctx.inlineQuery;
 
-        let mangas: InlineQueryResultArticle[] = media.map((item) => ({
-            type: 'article',
-            id: item.id.toString(),
-            title: item.title.romaji,
-            description: "✪ " + item.averageScore / 10,
-            thumb_url: item.coverImage.medium,
-            input_message_content: {
-                message_text: parseMedia({ data: { Media: item } }),
-                parse_mode: "HTML"
-            },
-            ...Markup.inlineKeyboard([
-                [
-                    Markup.button.url('AniList', `https://anilist.co/manga/${item.id}`),
-                    ...(item.idMal ? [Markup.button.url('MyAnimeList', `https://myanimelist.net/anime/${item.idMal}`)] : [])
-                ],
-                ...(item.trailer && item.trailer.site === "youtube" ? [[Markup.button.url('Watch Trailer', `https://youtu.be/${item.trailer.id}`)]] : [])
-            ])
-        }))
-        return await ctx.answerInlineQuery(mangas);
-    } else {
-        let args = query.startsWith('<a> ') ? query.substring(4) : query
-        const result = await getInlineResults(args, 'ANIME');
-        if (!result || result.data.Page.pageInfo.total === 0) return
-        let { media } = result.data.Page
-
-        let animes: InlineQueryResultArticle[] = media.map((item) => ({
-            type: 'article',
-            id: item.id.toString(),
-            title: item.title.romaji,
-            description: "✪ " + item.averageScore / 10,
-            thumb_url: item.coverImage.medium,
-            input_message_content: {
-                message_text: parseMedia({ data: { Media: item } }),
-                parse_mode: "HTML"
-            },
-            ...Markup.inlineKeyboard([
-                [
-                    Markup.button.url('AniList', `https://anilist.co/anime/${item.id}`),
-                    ...(item.idMal ? [Markup.button.url('MyAnimeList', `https://myanimelist.net/anime/${item.idMal}`)] : [])
-                ],
-                ...(item.trailer && item.trailer.site === "youtube" ? [[Markup.button.url('Watch Trailer', `https://youtu.be/${item.trailer.id}`)]] : [])
-            ])
-        }))
-
-        return await ctx.answerInlineQuery(animes)
+  if (query.startsWith('<m> ')) {
+    const args = query.substring(4);
+    if (args.length < 3) {
+      return;
     }
-})
+    const result = await getInlineResults(args, 'MANGA');
+    if (!result) {
+      return;
+    }
+    const { media } = result.Page;
+
+    const mangas: InlineQueryResultArticle[] = media.map((item) => {
+      const keyboard = new InlineKeyboard().url(
+        'AniList',
+        `https://anilist.co/manga/${item.id}`
+      );
+
+      if (item.idMal) {
+        keyboard.url(
+          'MyAnimeList',
+          `https://myanimelist.net/manga/${item.idMal}`
+        );
+      }
+      if (item.trailer?.site === 'youtube') {
+        keyboard
+          .row()
+          .url('Watch Trailer', `https://youtu.be/${item.trailer.id}`);
+      }
+
+      return {
+        type: 'article',
+        id: item.id.toString(),
+        title: item.title.romaji,
+        description: '✪ ' + item.averageScore / 10,
+        thumb_url: item.coverImage.medium,
+        input_message_content: {
+          message_text: parseMedia(item),
+          parse_mode: 'HTML'
+        },
+        reply_markup: keyboard
+      };
+    });
+    return await ctx.answerInlineQuery(mangas);
+  } else {
+    const args = query.startsWith('<a> ') ? query.substring(4) : query;
+    const result = await getInlineResults(args, 'ANIME');
+    if (!result) {
+      return;
+    }
+    const { media } = result.Page;
+
+    const animes: InlineQueryResultArticle[] = media.map((item) => {
+      const keyboard = new InlineKeyboard().url(
+        'AniList',
+        `https://anilist.co/anime/${item.id}`
+      );
+
+      if (item.idMal) {
+        keyboard.url(
+          'MyAnimeList',
+          `https://myanimelist.net/anime/${item.idMal}`
+        );
+      }
+      if (item.trailer?.site === 'youtube') {
+        keyboard
+          .row()
+          .url('Watch Trailer', `https://youtu.be/${item.trailer.id}`);
+      }
+
+      return {
+        type: 'article',
+        id: item.id.toString(),
+        title: item.title.romaji,
+        description: '✪ ' + item.averageScore / 10,
+        thumb_url: item.coverImage.medium,
+        input_message_content: {
+          message_text: parseMedia(item),
+          parse_mode: 'HTML'
+        },
+        reply_markup: keyboard
+      };
+    });
+    return await ctx.answerInlineQuery(animes);
+  }
+});
+
+export default composer;

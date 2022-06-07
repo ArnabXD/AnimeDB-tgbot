@@ -1,8 +1,8 @@
-import { Composer } from "telegraf";
-import callback from './callbackQuery'
+import { Composer } from 'grammy';
+import callback from './callbackQuery';
 import inline from './inlineQuery';
 
-export default new Composer().use(
-    callback,
-    inline
-)
+const composer = new Composer();
+composer.use(callback, inline);
+
+export default composer;

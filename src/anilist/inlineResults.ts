@@ -8,17 +8,15 @@ interface Media extends IMedia {
 }
 
 export interface InlineResultsType {
-  data: {
-    Page: {
-      pageInfo: {
-        total: number;
-        currentPage: number;
-        lastPage: number;
-        hasNextPage: boolean;
-        perPage: number;
-      };
-      media: Media[];
+  Page: {
+    pageInfo: {
+      total: number;
+      currentPage: number;
+      lastPage: number;
+      hasNextPage: boolean;
+      perPage: number;
     };
+    media: Media[];
   };
 }
 
@@ -70,7 +68,7 @@ export default async function getInlineResults(
       search: key,
       perPage: number
     });
-    return data.data.Page.pageInfo.total === 0 ? null : data;
+    return data.Page.pageInfo.total === 0 ? null : data;
   } catch (err) {
     console.error(err);
     return null;

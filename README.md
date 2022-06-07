@@ -1,17 +1,14 @@
 # AnimeDB-tgbot 
 A [Telegram Bot](https://telegram.dog/animedb_bot) to Search Anime & Manga Details using [AniList](https://anilist.co) API
 
-
-## Version 2.0.0 ( Jikan.Moe API )
-Check Branch [v-2.0.0](https://github.com/ArnabXD/AnimeDB-tgbot/tree/v-2.0.0)
-
 ### Run Locally
 ```shell
 git clone https://github.com/ArnabXD/AnimeDB-tgbot.git
 cd AnimeDB-tgbot
-npm install
+pnpm install
+pnpm run build
 vim .env
-npm run serve
+pnpm run start
 ```
 #### .env File
 ```

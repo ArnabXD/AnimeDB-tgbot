@@ -1,11 +1,11 @@
-import Search, { SearchResponse } from './search';
-import Media, { MediaResponse, Media as MediaI } from './getMedia';
+import search, { SearchResponse } from './search';
+import getMedia, { Media as MediaI, MediaResponse } from './getMedia';
 import getInlineResults, { InlineResultsType } from './inlineResults';
 
 export {
-  Search,
+  search,
   SearchResponse,
-  Media,
+  getMedia,
   MediaI,
   MediaResponse,
   getInlineResults,
