@@ -8,7 +8,9 @@
     "start": "node ./build/index",
     "serve": "ts-node ./src/index",
     "dev": "nodemon ./src/index",
-    "test": "tsc --noEmit"
+    "test": "tsc --noEmit",
+    "prettify": "prettier --write \"./src/**/*.ts\"",
+    "lint": "eslint ./src/**/*.ts"
   },
   "keywords": [
     "Telegram",
@@ -19,14 +21,21 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^16.0.1",
-    "node-fetch": "^3.2.5",
-    "telegraf": "^4.0.2",
-    "telegraf-command-parts": "^1.0.3"
+    "grammy": "^1.8.3",
+    "graphql": "^16.5.0",
+    "graphql-request": "^4.3.0",
+    "node-fetch": "^3.2.5"
   },
   "devDependencies": {
+    "@grammyjs/types": "github:grammyjs/types",
     "@types/node": "17.0.40",
     "@types/node-fetch": "2.6.1",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
     "nodemon": "2.0.16",
+    "prettier": "^2.6.2",
     "ts-node": "10.8.1",
     "typescript": "4.7.3"
   }
