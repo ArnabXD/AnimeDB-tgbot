@@ -35,7 +35,7 @@
     "ava": "^4.3.0",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
-    "nodemon": "2.0.16",
+    "nodemon": "2.0.19",
     "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
     "ts-node": "10.8.1",
