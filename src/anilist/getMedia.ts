@@ -1,19 +1,20 @@
-import { client, gql } from './gqlClient';
+import { client, gql } from "./gqlClient.ts";
 export interface Media {
   id: number;
-  idMal: number;
+  idMal: number | null;
   title: {
-    romaji: string;
-    english: string | null;
-    native: string | null;
-  };
+    romaji: string | null;
+    english?: string | null;
+    native?: string | null;
+  } & Record<string, string | null>;
   genres: string[];
   studios: {
     nodes: {
       name: string;
     }[];
   };
-  description: string;
+  isAdult?: boolean;
+  description: string | null;
   averageScore: number;
   status: string;
   format: string;
@@ -29,7 +30,7 @@ export interface MediaResponse {
 
 export default async function getMedia(
   id: number,
-  type: 'ANIME' | 'MANGA' = 'ANIME'
+  type: "ANIME" | "MANGA" = "ANIME",
 ) {
   const query = gql`
     query ($id: Int) { 

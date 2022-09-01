@@ -1,4 +1,4 @@
-import { GraphQLClient } from 'graphql-request';
+import { gql, GraphQLClient } from "gql";
 
-export { gql } from 'graphql-request';
-export const client = new GraphQLClient('https://graphql.anilist.co');
+export { gql };
+export const client = new GraphQLClient("https://graphql.anilist.co");

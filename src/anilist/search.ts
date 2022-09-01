@@ -1,4 +1,4 @@
-import { gql, client } from './gqlClient';
+import { client, gql } from "./gqlClient.ts";
 
 export interface SearchResponse {
   Page: {
@@ -13,6 +13,7 @@ export interface SearchResponse {
       id: number;
       title: {
         romaji: string;
+        english: string | null;
       };
     }[];
   };
@@ -20,8 +21,8 @@ export interface SearchResponse {
 
 export default async function search(
   key: string,
-  type: 'ANIME' | 'MANGA' = 'ANIME',
-  page = 1
+  type: "ANIME" | "MANGA" = "ANIME",
+  page = 1,
 ) {
   const query = gql`
     query ($id: Int, $page: Int, $perPage: Int, $search: String) {
@@ -33,7 +34,7 @@ export default async function search(
           hasNextPage
           perPage
         }
-        media (id: $id, search: $search,type:${type}) {
+        media (id: $id, search: $search, type:${type}) {
           id
           title {
             romaji
@@ -47,7 +48,7 @@ export default async function search(
     const data = await client.request<SearchResponse>(query, {
       search: key,
       page: page,
-      perPage: 10
+      perPage: 10,
     });
     return data.Page.pageInfo.total === 0 ? null : data;
   } catch (err) {
@@ -55,3 +56,5 @@ export default async function search(
     return null;
   }
 }
+
+await search("naruto", "ANIME");

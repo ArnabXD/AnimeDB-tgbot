@@ -1,17 +1,15 @@
-import { Bot } from 'grammy';
-import Middlewares from './middlewares';
-import Commands from './commands';
-import Handlers from './handlers';
-import dotenv from 'dotenv';
+import { Bot } from "grammy";
+import Middleware from "./middleware/mod.ts";
+import Commands from "./commands/mod.ts";
+import Handlers from "./handlers/mod.ts";
 
-dotenv.config();
-const token = process.env.BOT_TOKEN;
+const token = Deno.env.get("BOT_TOKEN");
 if (!token) {
-  throw new Error('BOT_TOKEN is not defined');
+  throw new Error("BOT_TOKEN is not defined");
 }
 
 const bot = new Bot(token);
 
-bot.use(Middlewares, Commands, Handlers);
+bot.use(Middleware, Commands, Handlers);
 
 export default bot;

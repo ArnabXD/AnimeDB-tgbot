@@ -1,0 +1,9 @@
+{
+  "imports": {
+    "grammy": "https://deno.land/x/grammy@v1.11.0/mod.ts",
+    "grammy/": "https://deno.land/x/grammy@v1.11.0/",
+    "gql": "https://deno.land/x/graphql_request@v4.1.0/mod.ts",
+    "server": "https://deno.land/std@0.153.0/http/server.ts",
+    "testing/": "https://deno.land/std@0.153.0/testing/"
+  }
+}

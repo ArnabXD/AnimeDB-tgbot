@@ -1,9 +1,9 @@
-import bot from './bot';
+import bot from "./bot.ts";
 
 bot.start({
   drop_pending_updates: true,
-  allowed_updates: ['callback_query', 'inline_query', 'message']
+  allowed_updates: ["callback_query", "inline_query", "message"],
 });
 
-process.once('SIGINT', () => bot.stop());
-process.once('SIGTERM', () => bot.stop());
+Deno.addSignalListener("SIGINT", () => bot.stop());
+Deno.addSignalListener("SIGTERM", () => bot.stop());
