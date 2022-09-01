@@ -14,7 +14,7 @@ specifiers:
   express: ^4.18.1
   grammy: ^1.8.3
   graphql: ^16.5.0
-  graphql-request: ^4.3.0
+  graphql-request: 5.0.0
   nodemon: 2.0.16
   prettier: ^2.6.2
   rimraf: ^3.0.2
@@ -25,14 +25,14 @@ dependencies:
   dotenv: 16.0.1
   grammy: 1.8.3
   graphql: 16.5.0
-  graphql-request: 4.3.0_graphql@16.5.0
+  graphql-request: 5.0.0_graphql@16.5.0
 
 optionalDependencies:
   express: 4.18.1
 
 devDependencies:
   '@ava/typescript': 3.0.1
-  '@grammyjs/types': github.com/grammyjs/types/6ba8e8bddcb4efebb3eec700578ae4fbdcb293f1
+  '@grammyjs/types': github.com/grammyjs/types/fc38e4d8535e8b59448657049375ec9530914ef9
   '@types/express': 4.17.13
   '@types/node': 17.0.40
   '@typescript-eslint/eslint-plugin': 5.27.1_gav5dxubrvrjafh4n6juxjnvcu
@@ -80,8 +80,16 @@ packages:
       - supports-color
     dev: true
 
-  /@grammyjs/types/2.7.2:
-    resolution: {integrity: sha512-zaZH34j/tXhz9fmCv+7dUkvHgp4q/uIuQ2SEWn7hJ7TEuUUa764bNguVHillqTwTgOL1XkbaTSMczbbCnjeB4Q==}
+  /@grammyjs/types/2.9.1:
+    resolution: {integrity: sha512-6x2Kj98wm3hcq3YQBhlGrYAuQJu3NAx4OmqnOvbBl/la0TIw/HRpu+AinMfkrgjvxR8KzL5hTWCHSXI6MqAj8Q==}
+    dev: false
+
+  /@graphql-typed-document-node/core/3.1.1_graphql@16.5.0:
+    resolution: {integrity: sha512-NQ17ii0rK1b34VZonlmT2QMJFI70m0TRwbknO/ihlbatXyaktDhN/98vBiUU6kNBPljqGqyIrl2T4nY2RpFANg==}
+    peerDependencies:
+      graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+    dependencies:
+      graphql: 16.5.0
     dev: false
 
   /@humanwhocodes/config-array/0.9.5:
@@ -1535,7 +1543,7 @@ packages:
     resolution: {integrity: sha512-3esAETA0HXR9wb8x65uYeAt1AbCQsJC5l6iuxSRXZR2cSxEf+61vIbJ5qUvw7TfMkgPuH71Gi7AHSFGZ+F1eqQ==}
     engines: {node: ^12.20.0 || >=14.13.1}
     dependencies:
-      '@grammyjs/types': 2.7.2
+      '@grammyjs/types': 2.9.1
       abort-controller: 3.0.0
       debug: 4.3.4
       node-fetch: 2.6.7
@@ -1544,11 +1552,12 @@ packages:
       - supports-color
     dev: false
 
-  /graphql-request/4.3.0_graphql@16.5.0:
-    resolution: {integrity: sha512-2v6hQViJvSsifK606AliqiNiijb1uwWp6Re7o0RTyH+uRTv/u7Uqm2g4Fjq/LgZIzARB38RZEvVBFOQOVdlBow==}
+  /graphql-request/5.0.0_graphql@16.5.0:
+    resolution: {integrity: sha512-SpVEnIo2J5k2+Zf76cUkdvIRaq5FMZvGQYnA4lUWYbc99m+fHh4CZYRRO/Ff4tCLQ613fzCm3SiDT64ubW5Gyw==}
     peerDependencies:
       graphql: 14 - 16
     dependencies:
+      '@graphql-typed-document-node/core': 3.1.1_graphql@16.5.0
       cross-fetch: 3.1.5
       extract-files: 9.0.0
       form-data: 3.0.1
@@ -2928,8 +2937,8 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
-  github.com/grammyjs/types/6ba8e8bddcb4efebb3eec700578ae4fbdcb293f1:
-    resolution: {tarball: https://codeload.github.com/grammyjs/types/tar.gz/6ba8e8bddcb4efebb3eec700578ae4fbdcb293f1}
+  github.com/grammyjs/types/fc38e4d8535e8b59448657049375ec9530914ef9:
+    resolution: {tarball: https://codeload.github.com/grammyjs/types/tar.gz/fc38e4d8535e8b59448657049375ec9530914ef9}
     name: '@grammyjs/types'
-    version: 2.7.2
+    version: 2.9.1
     dev: true
