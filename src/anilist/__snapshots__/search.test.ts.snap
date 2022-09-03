@@ -1,0 +1,89 @@
+export const snapshot = {};
+
+snapshot[`search anime 1`] = `
+{
+  Page: {
+    media: [
+      {
+        id: 1639,
+        title: {
+          english: null,
+          romaji: "Boku no Pico",
+        },
+      },
+      {
+        id: 5391,
+        title: {
+          english: null,
+          romaji: "Pico to Chico",
+        },
+      },
+      {
+        id: 4866,
+        title: {
+          english: null,
+          romaji: "Pico x CoCo x Chico",
+        },
+      },
+      {
+        id: 6546,
+        title: {
+          english: null,
+          romaji: "pico: Boku no Chiisana Natsu Monogatari",
+        },
+      },
+    ],
+    pageInfo: {
+      currentPage: 1,
+      hasNextPage: false,
+      lastPage: 1,
+      perPage: 10,
+      total: 4,
+    },
+  },
+}
+`;
+
+snapshot[`search manga 1`] = `
+{
+  Page: {
+    media: [
+      {
+        id: 102988,
+        title: {
+          english: "Tokyo Revengers",
+          romaji: "Tokyo卍Revengers",
+        },
+      },
+      {
+        id: 114523,
+        title: {
+          english: null,
+          romaji: "Baki Gaiden: Revenge Tokyo",
+        },
+      },
+      {
+        id: 152895,
+        title: {
+          english: null,
+          romaji: "Tokyo卍Revengers Full Color Tanpenshuu",
+        },
+      },
+      {
+        id: 151997,
+        title: {
+          english: null,
+          romaji: "Tokyo卍Revengers: Baji Keisuke Kara no Tegami ",
+        },
+      },
+    ],
+    pageInfo: {
+      currentPage: 1,
+      hasNextPage: false,
+      lastPage: 1,
+      perPage: 10,
+      total: 4,
+    },
+  },
+}
+`;

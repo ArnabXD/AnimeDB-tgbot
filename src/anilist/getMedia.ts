@@ -3,7 +3,7 @@ export interface Media {
   id: number;
   idMal: number | null;
   title: {
-    romaji: string | null;
+    romaji: string;
     english?: string | null;
     native?: string | null;
   } & Record<string, string | null>;

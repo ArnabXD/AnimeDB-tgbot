@@ -38,7 +38,7 @@ jobs:
         with:
           deno-version: vx.x.x
       - name: Run Tests
-        run: deno test
+        run: deno test --allow-all
 
   release:
     runs-on: ubuntu-latest
