@@ -1,4 +1,4 @@
-import bot from "./bot.ts";
+import bot from "./src/bot.ts";
 
 bot.start({
   drop_pending_updates: true,
