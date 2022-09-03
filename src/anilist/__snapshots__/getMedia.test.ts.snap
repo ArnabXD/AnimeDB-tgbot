@@ -1,0 +1,93 @@
+export const snapshot = {};
+
+snapshot[`fetch anime information 1`] = `
+{
+  Media: {
+    averageScore: 79,
+    description: "Naruto Uzumaki, a hyperactive and knuckle-headed ninja, lives in Konohagakure, the Hidden Leaf village. Moments prior to his birth, a huge demon known as the Kyuubi, the Nine-tailed Fox, attacked Konohagakure and wreaked havoc. In order to put an end to the Kyuubi's rampage, the leader of the village, the 4th Hokage, sacrificed his life and sealed the monstrous beast inside the newborn Naruto. <br><br>
+Shunned because of the presence of the Kyuubi inside him, Naruto struggles to find his place in the village. He strives to become the Hokage of Konohagakure, and he meets many friends and foes along the way. <br><br>
+(Source: MAL Rewrite)",
+    format: "TV",
+    genres: [
+      "Action",
+      "Adventure",
+      "Comedy",
+      "Drama",
+      "Fantasy",
+      "Supernatural",
+    ],
+    id: 20,
+    idMal: 20,
+    status: "FINISHED",
+    studios: {
+      nodes: [
+        {
+          name: "Studio Pierrot",
+        },
+        {
+          name: "TV Tokyo",
+        },
+        {
+          name: "Aniplex",
+        },
+        {
+          name: "Viz Media",
+        },
+        {
+          name: "Shueisha",
+        },
+        {
+          name: "KSS",
+        },
+        {
+          name: "SME Visual Works",
+        },
+        {
+          name: "Rakuonsha",
+        },
+      ],
+    },
+    title: {
+      english: "Naruto",
+      native: "NARUTO -ナルト-",
+      romaji: "NARUTO",
+    },
+    trailer: null,
+  },
+}
+`;
+
+snapshot[`fetch manga information 1`] = `
+{
+  Media: {
+    averageScore: 81,
+    description: "Hanagaki Takemichi was once a low-life punk, but after biting off more than he could chew with a gang in middle school, he ran away from his old life. Now that he’s an adult, the gang that once terrorized him has grown into the largest gang in Tokyo, and they’ve started killing people–including his old girlfriend! After learning this news, a mysterious force on a train platform shoves Takemichi right in front of an approaching train. As his life flashes before his eyes, he blinks to find himself transported back to middle school, before he fled from the gang! Now he has the chance to right what went wrong all those years ago. Can he save his girlfriend’s life in the future–and what else might he change if he’s rewriting the past?
+<br><br>
+(Source: Seven Seas Entertainment)
+<br><br>
+<i>Notes:<br>
+- Winner of the Shounen Manga category of the 44th annual Kodansha Manga Awards.<br>
+- Includes 1 extra chapter.</i>",
+    format: "MANGA",
+    genres: [
+      "Action",
+      "Drama",
+      "Romance",
+      "Supernatural",
+    ],
+    id: 102988,
+    idMal: 104565,
+    status: "RELEASING",
+    studios: {
+      nodes: [
+      ],
+    },
+    title: {
+      english: "Tokyo Revengers",
+      native: "東京卍リベンジャーズ",
+      romaji: "Tokyo卍Revengers",
+    },
+    trailer: null,
+  },
+}
+`;

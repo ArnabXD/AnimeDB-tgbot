@@ -1,5 +1,5 @@
-import { client, gql } from './gqlClient';
-import { Media as IMedia } from './getMedia';
+import { client, gql } from "./gqlClient.ts";
+import { Media as IMedia } from "./getMedia.ts";
 
 interface Media extends IMedia {
   coverImage: {
@@ -22,8 +22,8 @@ export interface InlineResultsType {
 
 export default async function getInlineResults(
   key: string,
-  type: 'ANIME' | 'MANGA' = 'ANIME',
-  number = 25
+  type: "ANIME" | "MANGA" = "ANIME",
+  number = 25,
 ) {
   const query = gql`
     query ($id: Int, $page: Int, $perPage: Int, $search: String) {
@@ -66,7 +66,7 @@ export default async function getInlineResults(
   try {
     const data = await client.request<InlineResultsType>(query, {
       search: key,
-      perPage: number
+      perPage: number,
     });
     return data.Page.pageInfo.total === 0 ? null : data;
   } catch (err) {
